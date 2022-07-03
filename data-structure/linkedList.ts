@@ -1,29 +1,167 @@
-// Read about linked lists and its working mechanism and implement it functionality.
+// eslint-disable-next-line max-classes-per-file,@typescript-eslint/ban-ts-comment
+// @ts-ignore
+// eslint-disable-next-line max-classes-per-file
+type Item = string | number;
+
+interface NodeObject {
+  value: Item;
+  next: object | null;
+}
+
+// eslint-disable-next-line max-classes-per-file
+class LinkedListNode implements NodeObject {
+  value: Item;
+
+  next: NodeObject | null;
+
+  constructor(value: Item, next?: NodeObject | null) {
+    this.value = value;
+    this.next = next || null;
+  }
+}
 
 class LinkedList {
-	insert() {
-		// add value to linked list
-	}
+  head: NodeObject | null;
 
-	insertFirst() {
-		// * add value to the top of linked list
-	}
+  tail: NodeObject | null;
 
-	removeFirst() {
-		// remove first value from linked list
-	}
+  constructor() {
+    this.head = null;
+    this.tail = null;
+  }
 
-	removeAt() {
-		// * remove value by key from linked list
-	}
+  insert(value: Item) {
+    const newNode = new LinkedListNode(value);
 
-	find() {
-		// get value by key from linked list
-	}
+    if (!this.head || !this.tail) {
+      this.head = newNode;
+      this.tail = newNode;
 
-	clearDuplicates() {
-		// * remove all duplicated values
-	}
+      return this;
+    }
+
+    this.tail.next = newNode;
+    this.tail = newNode;
+
+    return this;
+  }
+
+  insertFirst(value: Item) {
+    const newNode = new LinkedListNode(value, this.head);
+
+    this.head = newNode;
+
+    if (!this.tail) {
+      this.tail = newNode;
+    }
+
+    return this;
+  }
+
+  removeFirst() {
+    if (!this.head) {
+      return this;
+    }
+
+    if (this.head.next) {
+      this.head = this.head.next as NodeObject;
+    } else {
+      this.head = null;
+      this.tail = null;
+    }
+
+    return this;
+  }
+
+  removeAt(value: Item) {
+    if (!this.head) {
+      return null;
+    }
+
+    while (this.head && this.head.value === value) {
+      this.head = this.head.next as NodeObject;
+    }
+
+    let currentNode = this.head;
+
+    if (currentNode !== null) {
+      while (currentNode.next) {
+        if ((currentNode.next as NodeObject).value === value) {
+          currentNode.next = (currentNode.next as NodeObject).next;
+        } else {
+          currentNode = currentNode.next as NodeObject;
+        }
+      }
+    }
+
+    if (this.tail && this.tail.value === value) {
+      this.tail = currentNode;
+    }
+
+    return this;
+  }
+
+  find(value: Item) {
+    if (!this.head) {
+      return null;
+    }
+
+    let currentNode = this.head;
+
+    while (currentNode) {
+      if (value !== undefined && currentNode.value === value) {
+        return currentNode;
+      }
+
+      currentNode = currentNode.next as NodeObject;
+    }
+
+    return null;
+  }
+
+  clearDuplicates() {
+    if (!this.head) {
+      return null;
+    }
+
+    let currentNode: NodeObject = this.head;
+    const arrayValue: Item[] = [];
+
+    if (currentNode !== null) {
+      while (currentNode.next) {
+        if (arrayValue.indexOf(currentNode.value) !== -1) {
+          arrayValue.push(currentNode.value);
+        }
+        currentNode = currentNode.next as NodeObject;
+      }
+      arrayValue.push(currentNode.value);
+    }
+
+    arrayValue.forEach((item) => {
+      const newNode = new LinkedListNode(item);
+
+      if (!this.head || !this.tail) {
+        this.head = newNode;
+        this.tail = newNode;
+      }
+
+      this.tail.next = newNode;
+      this.tail = newNode;
+    });
+
+    return this;
+  }
 }
 
 const linkedList = new LinkedList();
+linkedList.insert("Denis");
+linkedList.insert("Sergei");
+linkedList.insert("Igor");
+linkedList.insertFirst("Alisa");
+linkedList.removeFirst();
+linkedList.removeAt("Igor");
+linkedList.find("Denis");
+linkedList.insert("Sergei");
+linkedList.insert("Sergei");
+linkedList.clearDuplicates();
+console.log(linkedList);
