@@ -1,6 +1,6 @@
 // Read about hash tables and its working mechanism and implement it functionality.
 // NOTE: get acquainted with possible collisions when working with hash tables, take this information into account when implementing.
-type Item = any;
+type Item = unknown;
 
 type List = Array<[string, Item]>;
 
