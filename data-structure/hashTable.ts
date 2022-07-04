@@ -23,10 +23,7 @@ class HashTable {
       this.store[index] = [[key, value]];
     } else {
       const list: List = this.store[index];
-      const matchingIndex: number | void = HashTable.findMatchingIndex(
-        list,
-        key
-      );
+      const matchingIndex: number | void = this.findMatchingIndex(list, key);
 
       if (matchingIndex) {
         list[matchingIndex] = [key, value];
@@ -41,10 +38,7 @@ class HashTable {
     const index: number = this.hash(key);
     if (this.store[index]) {
       const list = this.store[index];
-      const matchingIndex: number | void = HashTable.findMatchingIndex(
-        list,
-        key
-      );
+      const matchingIndex: number | void = this.findMatchingIndex(list, key);
 
       if (matchingIndex || matchingIndex === 0) {
         this.store[index] = [
@@ -59,29 +53,25 @@ class HashTable {
     const index = this.hash(key);
     if (this.store[index]) {
       const list = this.store[index];
-      const matchingIndex: number | void = HashTable.findMatchingIndex(
-        list,
-        key
-      );
+      const matchingIndex: number | void = this.findMatchingIndex(list, key);
       if (matchingIndex || matchingIndex === 0) return list[matchingIndex];
     }
     return "No matches";
   }
 
   hash(value: string) {
-    let index: number;
-    index = 0;
+    let index = 0;
     for (let i = 0; i < value.length; i += 1) {
       index += value.charCodeAt(i) * (i + 1);
     }
     return index % this.size;
   }
 
-  dump() {
+  consoleStore() {
     return this.store;
   }
 
-  static findMatchingIndex(list: List, key: string): number | void {
+  findMatchingIndex(list: List, key: string): number | void {
     for (let i = 0; i < list.length; i += 1) {
       if (list[i][0] === key) return i;
     }
@@ -95,7 +85,7 @@ hashTable.add("Two", "Artur");
 hashTable.add("Three", "Masha");
 hashTable.add("for", "Leo");
 hashTable.add("rof", "Akkad");
-console.log(hashTable.dump());
+console.log(hashTable.consoleStore());
 hashTable.remove("rof");
-console.log(hashTable.dump());
+console.log(hashTable.consoleStore());
 console.log(hashTable.find("One"));
