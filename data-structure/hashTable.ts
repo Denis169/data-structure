@@ -9,10 +9,10 @@ type Store = Array<List>;
 class HashTable {
   private readonly store: Store;
 
-  private readonly size: number;
+  private readonly hashTableSize: number = 13;
 
-  constructor(size = 13) {
-    this.size = size;
+  constructor(hashTableSize: number) {
+    this.hashTableSize = hashTableSize;
     this.store = [];
   }
 
@@ -64,7 +64,7 @@ class HashTable {
     for (let i = 0; i < value.length; i += 1) {
       index += value.charCodeAt(i) * (i + 1);
     }
-    return index % this.size;
+    return index % this.hashTableSize;
   }
 
   consoleStore() {
@@ -75,11 +75,10 @@ class HashTable {
     for (let i = 0; i < list.length; i += 1) {
       if (list[i][0] === key) return i;
     }
-    return undefined;
   }
 }
 
-const hashTable = new HashTable();
+const hashTable = new HashTable(13);
 hashTable.add("One", "Denis");
 hashTable.add("Two", "Artur");
 hashTable.add("Three", "Masha");
