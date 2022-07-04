@@ -1,24 +1,5 @@
-// eslint-disable-next-line max-classes-per-file,@typescript-eslint/ban-ts-comment
-// @ts-ignore
-// eslint-disable-next-line max-classes-per-file
-type Item = string | number;
-
-interface NodeObject {
-  value: Item;
-  next: object | null;
-}
-
-// eslint-disable-next-line max-classes-per-file
-class LinkedListNode implements NodeObject {
-  value: Item;
-
-  next: NodeObject | null;
-
-  constructor(value: Item, next?: NodeObject | null) {
-    this.value = value;
-    this.next = next || null;
-  }
-}
+import { Item, NodeObject } from "./types";
+import LinkedListNode from "./linkedListNode";
 
 class LinkedList {
   head: NodeObject | null;

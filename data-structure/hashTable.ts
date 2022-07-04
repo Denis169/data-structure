@@ -1,9 +1,6 @@
 // Read about hash tables and its working mechanism and implement it functionality.
 // NOTE: get acquainted with possible collisions when working with hash tables, take this information into account when implementing.
-
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-type Item = string | number;
+import { Item } from "./types";
 
 type List = Array<Array<string | Item>>;
 

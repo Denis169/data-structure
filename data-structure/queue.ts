@@ -1,8 +1,5 @@
 // Read about queue and learn its working mechanism and implement it functionality.
-
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-type Item = string | number;
+import { Item } from "./types";
 
 class Queue {
   queue: Item[];
