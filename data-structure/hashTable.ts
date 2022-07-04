@@ -1,8 +1,8 @@
 // Read about hash tables and its working mechanism and implement it functionality.
 // NOTE: get acquainted with possible collisions when working with hash tables, take this information into account when implementing.
-import { Item } from "./types";
+type Item = any;
 
-type List = Array<Array<string | Item>>;
+type List = Array<[string, Item]>;
 
 type Store = Array<List>;
 
@@ -79,7 +79,7 @@ class HashTable {
 }
 
 const hashTable = new HashTable(13);
-hashTable.add("One", "Denis");
+hashTable.add("One", () => console.log("Denis"));
 hashTable.add("Two", "Artur");
 hashTable.add("Three", "Masha");
 hashTable.add("for", "Leo");
